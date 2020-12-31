@@ -1,10 +1,14 @@
 # Application Imports
 from card import Card
+from deck import Deck
 
 
 class Dealer:
     def __init__(self):
-        self.cards = []
-        self.visible_card = ""
-        self.__value_hand = 0
-        self.value_hand = sum([item.value for item in self.cards])
+        self.__deck = Deck()
+        self.__score = sum([item.value for item in self.__hand])
+        self.__hand = []
+        self.visible_card = []
+
+    def deal_card(self):
+        return self.__deck.draw_card()
