@@ -2,8 +2,8 @@
 import random
 
 # Application Level import
-from ciaran_lyons_blackjack.components.card import Card
-from ciaran_lyons_blackjack.components.config import (
+from blackjack_assignment.components.card import Card
+from blackjack_assignment.components.config import (
     num_of_decks,
     rank_values,
     suits

@@ -1,11 +1,18 @@
-from ciaran_lyons_blackjack.components.card import Card
+# Application Imports
+from blackjack_assignment.components.card import Card
+
+# Types for static Type checking
+Hand = list[Card]
 
 
 class Player:
-    def __init__(self):
-        self.hand = []
+    """
+    Player Class - will have a single
+    """
+    def __init__(self, cards: Hand):
+        self.hand = cards
         self.score = 0
-        self.sticking = False  # True means player is sticking
+        self.sticking = False
 
     def hit(self, card: Card):
         self.hand.append(card)

@@ -1,18 +1,15 @@
 # Application Imports
-from ciaran_lyons_blackjack.components.deck import Deck
+from blackjack_assignment.components.deck import Deck
+from blackjack_assignment.components.player import Player
 
 
 class Dealer:
     def __init__(self):
         self.__deck = Deck()
-        self.__hidden = None
-        self.hand = []
+        self.__hidden = self.deal_card()
+        self.hand = [self.deal_card()]
         self.score = sum([item.value for item in self.hand])
-
-    def opening_deal(self):
-        self.hit()
-        self.__hidden = self.__deck.draw_card()
-        return self.score
+        self.player = Player([self.deal_card() for i in range(2)])
 
     def deal_card(self):
         return self.__deck.draw_card()
