@@ -1,27 +1,21 @@
-# Application Imports
+# Local Application Imports
+from blackjack_assignment.components.card import Card
 from blackjack_assignment.components.deck import Deck
 from blackjack_assignment.components.player import Player
 
 
-class Dealer:
+class Dealer(Player):
     def __init__(self):
-        self.__deck = Deck()
-        self.__hidden = self.deal_card()
-        self.hand = [self.deal_card()]
-        self.score = sum([item.value for item in self.hand])
-        self.player = Player([self.deal_card() for i in range(2)])
+        self.__deck: Deck = Deck()
+        # Inheritance is done after "self.__deck" to be initialised
+        super().__init__([self.deal_card()], name="Dealer")
+        self.__hidden: list[Card] = [self.deal_card()]
 
     def deal_card(self):
         return self.__deck.draw_card()
 
-    def hit(self, first_hit=False):
-        if first_hit:
-            card = self.__hidden
-        else:
-            card = self.deal_card()
-        self.hand.append(card)
-        self.score = sum([item.value for item in self.hand])
-        return self.score
+    def count_hidden(self):
+        return len(self.__hidden)
 
-    def show_hand(self):
-        return [str(item) for item in self.hand]
+    def reveal_hidden(self):
+        return self.hit(self.__hidden.pop())

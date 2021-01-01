@@ -1,9 +1,9 @@
 # Standard Library Imports
 import random
 
-# Application Level import
+# Local Application Imports
 from blackjack_assignment.components.card import Card
-from blackjack_assignment.components.config import (
+from blackjack_assignment.utils.config import (
     num_of_decks,
     rank_values,
     suits
@@ -16,7 +16,7 @@ class Deck:
             Card(rank, rank_values.get(rank), suit)
             for suit in suits
             for rank in rank_values.keys()
-            for deck_num in range(num_of_decks)
+            for _ in range(num_of_decks)
         ]
 
     def draw_card(self):
