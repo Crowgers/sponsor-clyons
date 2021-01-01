@@ -1,4 +1,8 @@
+#  Standard Library Imports
 import random
+
+# TODO: This is not an example of "good code" however there are nice ideas here
+# TODO: Clean up This so it is an example of good code.
 
 
 def get_num_names():
