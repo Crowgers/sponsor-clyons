@@ -1,10 +1,4 @@
-suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
-suit_symbols = {
-    "Spades": "\u2664",
-    "Hearts": "\u2661",
-    "Clubs": "\u2667",
-    "Diamonds": "\u2662"
-}
+num_of_decks = 1
 rank_values = {
     "ACE": 11,
     "2": 2,
@@ -20,3 +14,10 @@ rank_values = {
     "QUEEN": 10,
     "KING": 10
 }
+suit_symbols = {
+    "Spades": "\u2664",
+    "Hearts": "\u2661",
+    "Clubs": "\u2667",
+    "Diamonds": "\u2662"
+}
+suits = ["Spades", "Hearts", "Clubs", "Diamonds"]

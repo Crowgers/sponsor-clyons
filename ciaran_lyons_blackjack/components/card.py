@@ -7,7 +7,7 @@ class Card:
         self.suit = suit
 
     def __str__(self):
-        return f"{self.rank} of {self.suit}s"
+        return f"{self.rank} of {self.suit}"
 
     def __repr__(self):
         return f"Card(rank={self.rank}, value={self.value}, suit={self.suit})"

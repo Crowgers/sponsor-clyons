@@ -2,16 +2,21 @@
 import random
 
 # Application Level import
-from card import Card
-from config import suits, rank_values
+from ciaran_lyons_blackjack.components.card import Card
+from ciaran_lyons_blackjack.components.config import (
+    num_of_decks,
+    rank_values,
+    suits
+)
 
 
 class Deck:
     def __init__(self):
-        self.__cards = [  # of type list
+        self.__cards = [
             Card(rank, rank_values.get(rank), suit)
             for suit in suits
             for rank in rank_values.keys()
+            for deck_num in range(num_of_decks)
         ]
 
     def draw_card(self):
