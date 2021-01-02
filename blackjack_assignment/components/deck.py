@@ -3,7 +3,7 @@ import random
 
 # Local Application Imports
 from blackjack_assignment.components.card import Card
-from blackjack_assignment.utils.config import (
+from blackjack_assignment.components.variables import (
     num_of_decks,
     rank_values,
     suits

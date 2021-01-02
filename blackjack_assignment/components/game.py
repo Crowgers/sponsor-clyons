@@ -1,6 +1,6 @@
 # Local Application Imports
 from blackjack_assignment.components.dealer import Dealer
-from blackjack_assignment.utils.user_input import ask
+from blackjack_assignment.components.user_input import ask
 from blackjack_assignment.components.player import Player
 
 
