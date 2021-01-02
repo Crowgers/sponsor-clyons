@@ -7,6 +7,9 @@ from blackjack_assignment.components.player import Player
 class Game:
     def __init__(self):
         print("Dealing Hands...")
+        #  Technically the game class could inherit from the dealer however
+        #  inheriting from player would cause n overload of certain methods
+        #  in the player class which dealer inherits from,.
         self.dealer = Dealer()  # Dealer needs to exist first
         self.player = Player([self.dealer.deal_card() for _ in range(2)])
 
@@ -16,39 +19,36 @@ class Game:
     def __iter__(self):
         return self
 
-    def players_turn(self):
-        while not self.player.busted:
+    def __players_turn(self):
+        while not any([self.player.busted, self.player.sticking]):
             self.print_hands()
             decision = ask("Hit or Stick?", ["Hit", "Stick"])
-            if self.player.score > 21:
-                self.player.bust()
-                break
-            elif decision == 0:
+            if decision == 0:
                 self.player.hit(self.dealer.deal_card())
             else:
                 self.player.stick()
-                break
-        return
+            if self.player.score > 21:
+                self.player.bust()
 
-    def dealers_turn(self):
-        # Dealers turn
+    def __dealers_turn(self):
         self.dealer.reveal_hidden()
-        self.print_hands()
-        if self.player.score < 21:
+        if not self.player.score > 21:
             # Unusual but it's guaranteed to exit after finite loops
             while not self.dealer.score > 17:
-                self.print_hands()
+                print("Dealer hits...")
                 self.dealer.hit(self.dealer.deal_card())
+            self.print_hands()
 
     def print_hands(self):
         print(f"\tDealer's hand: ({self.dealer.score}) "
               f"{self.dealer.show_hand()} and "
-              f"has {self.dealer.count_hidden()} face down card.")
+              f"has {self.dealer.count_hidden()} hidden card(s).")
         print(f"\tPlayer's hand: ({self.player.score}) "
               f"{self.player.show_hand()}")
 
-    def result(self):
-        self.print_hands()
+    def play(self):
+        self.__players_turn()
+        self.__dealers_turn()
         if self.player.score > 21:
             print(f"Dealer ({self.dealer.score}) wins. "
                   f"Player ({self.player.score}) is bust.")

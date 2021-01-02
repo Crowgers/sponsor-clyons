@@ -7,6 +7,6 @@ def ask(prompt: str, options: list):
             selected_option = int(input("Enter Selection: ")) - 1
             if selected_option not in range(len(options)):
                 raise ValueError
-            return selected_option
         except ValueError:
             print("Invalid input, please enter option number.")
+        return selected_option
