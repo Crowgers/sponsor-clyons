@@ -1,4 +1,4 @@
-def prompt_for_input(prompt: str, options: list):
+def ask(prompt: str, options: list):
     selected_option = ""
     while selected_option not in options:
         try:

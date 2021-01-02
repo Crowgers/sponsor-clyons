@@ -6,5 +6,5 @@ class Card:
         self.value = value
         self.suit = suit
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.rank} of {self.suit}"

@@ -1,61 +1,67 @@
 # Local Application Imports
 from blackjack_assignment.components.dealer import Dealer
-from blackjack_assignment.utils.input_prompt import prompt_for_input
-from blackjack_assignment.utils.print_hands import print_hands
+from blackjack_assignment.utils.user_input import ask
 from blackjack_assignment.components.player import Player
 
 
 class Game:
     def __init__(self):
+        print("Dealing Hands...")
         self.dealer = Dealer()  # Dealer needs to exist first
         self.player = Player([self.dealer.deal_card() for _ in range(2)])
 
-    def __enter__(self):
-        print("Dealing Hands...")
+    def __next__(self):
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print("Game Finished.")
-        return
+    def __iter__(self):
+        return self
 
     def players_turn(self):
-        while True:
-            print_hands(self.dealer, self.player)
-            decision = prompt_for_input("Hit or Stick?", ["Hit", "Stick"])
+        while not self.player.busted:
+            self.print_hands()
+            decision = ask("Hit or Stick?", ["Hit", "Stick"])
             if self.player.score > 21:
                 self.player.bust()
-                state = "Player is busted"
                 break
             elif decision == 0:
                 self.player.hit(self.dealer.deal_card())
             else:
-                state = "Player is sticking"
+                self.player.stick()
                 break
-        print(state)
         return
 
     def dealers_turn(self):
         # Dealers turn
-        # Early check to see if player is bust.
-        if self.player.score > 21:
-            return f"Dealer ({self.dealer.score}) wins. " \
-                   f"Player ({self.player.score}) is bust."
         self.dealer.reveal_hidden()
-        while not self.dealer.score > 17:
-            print_hands(self.dealer, self.player)
-            self.dealer.hit(self.dealer.deal_card())
-        # Evaluate result once dealer hits stop condition
-        if self.dealer.score > 21:
-            outcome = f"Player ({self.player.score}) wins: " \
-                      f"Dealer ({self.dealer.score}) is bust."
+        self.print_hands()
+        if self.player.score < 21:
+            # Unusual but it's guaranteed to exit after finite loops
+            while not self.dealer.score > 17:
+                self.print_hands()
+                self.dealer.hit(self.dealer.deal_card())
+
+    def print_hands(self):
+        print(f"\tDealer's hand: ({self.dealer.score}) "
+              f"{self.dealer.show_hand()} and "
+              f"has {self.dealer.count_hidden()} face down card.")
+        print(f"\tPlayer's hand: ({self.player.score}) "
+              f"{self.player.show_hand()}")
+
+    def result(self):
+        self.print_hands()
+        if self.player.score > 21:
+            print(f"Dealer ({self.dealer.score}) wins. "
+                  f"Player ({self.player.score}) is bust.")
+        elif self.dealer.score > 21:
+            print(f"Player ({self.player.score}) wins: " 
+                  f"Dealer ({self.dealer.score}) is bust.")
         elif self.dealer.score > self.player.score:
-            outcome = f"Dealer ({self.dealer.score}) wins: " \
-                      f"Player ({self.player.score}) < dealer"
-        elif self.player.score > self.dealer.score:
-            outcome = f"Player ({self.player.score}) wins: " \
-                      f"player > dealer ({self.dealer.score})"
+            print(f"Dealer ({self.dealer.score}) wins: "
+                  f"Player ({self.player.score}) < dealer")
+        elif self.dealer.score < self.player.score:
+            print(f"Player ({self.player.score}) wins: "
+                  f"player > dealer ({self.dealer.score})")
         else:  # self.dealer.score == self.player.score ## not good rewrite
-            outcome = f"Draw game: Player ({self.player.score}) = " \
-                      f"Dealer ({self.dealer.score})"
-        print(outcome)
-        return outcome
+            print(f"Draw game: Player ({self.player.score}) = "
+                  f"Dealer ({self.dealer.score})")
+        print("Game Finished.")
