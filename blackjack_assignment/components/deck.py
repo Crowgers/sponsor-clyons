@@ -12,13 +12,13 @@ from blackjack_assignment.components.variables import (
 
 class Deck:
     def __init__(self):
-        self.__cards = [
+        self.__cards: list[Card] = [
             Card(rank, rank_values.get(rank), suit)
             for suit in suits
             for rank in rank_values.keys()
             for _ in range(num_of_decks)
         ]
 
-    def draw_card(self):
+    def draw_card(self) -> Card:
         choice_index = random.choice(range(len(self.__cards)))
         return self.__cards.pop(choice_index)

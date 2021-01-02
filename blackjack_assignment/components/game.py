@@ -10,8 +10,10 @@ class Game:
         #  Technically the game class could inherit from the dealer however
         #  inheriting from player would cause n overload of certain methods
         #  in the player class which dealer inherits from,.
-        self.dealer = Dealer()  # Dealer needs to exist first
-        self.player = Player([self.dealer.deal_card() for _ in range(2)])
+        self.dealer: Dealer = Dealer()  # Dealer needs to exist first
+        self.player: Player = Player(
+            [self.dealer.deal_card() for _ in range(2)]
+        )
 
     def __next__(self):
         return self

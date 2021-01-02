@@ -13,3 +13,5 @@ There is an over-reliance on ```while``` loops and some funky looking stuff in
 ```components/game.py```. 
 
 Don't take it as an example of "good pythonic code". 
+
+Plus there are magic numbers everywhere. 

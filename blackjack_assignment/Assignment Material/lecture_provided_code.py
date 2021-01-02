@@ -31,6 +31,7 @@ class Card:
             val = 11
         return val
 
+
 class Deck:
     def __init__(self):
         self.cards = []
@@ -46,6 +47,7 @@ class Deck:
             if self.cards[index].available:
                 self.cards[index].available = False
                 return self.cards[index]
+
 
 deck = Deck()
 print(deck.get_random_card())
