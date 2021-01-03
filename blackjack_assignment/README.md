@@ -42,7 +42,7 @@ This is a work in progress and so all issues have been highlighted with
 
 ## Footnotes
 <sup>1</sup> This is to take advantage of "Generic type annotations" that 
-are optional but are clear and thus used extensively
+are optional but are clear and thus used extensively.</br>
 <sup>2</sup> Unfortunately one of the downsides to python is that, beyond 
 version 2.x.x & 3.x.x, effective version management requires a 3rd party 
 tool (E.g. pyenv, pipenv or docker) to manage available python interpreters. 
