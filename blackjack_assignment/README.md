@@ -17,8 +17,8 @@ Click for the full [Assignment Descriptor].
 1. Set your python version to `>=3.9.0` <sup>2</sup>
 2. Create & source a venv
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .venv_blackjack
+source .venv_blackjack/bin/activate
 ```
 3. Run [`blackjack.py`](blackjack.py) script.
 - You should see a welcome message and the opening hands for both 
