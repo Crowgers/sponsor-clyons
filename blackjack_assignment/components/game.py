@@ -7,20 +7,12 @@ from blackjack_assignment.components.player import Player
 class Game:
     def __init__(self):
         print("Dealing Hands...")
-        #  Technically the game class could inherit from the dealer however
-        #  inheriting from player would cause n overload of certain methods
-        #  in the player class which dealer inherits from,.
         self.dealer: Dealer = Dealer()  # Dealer needs to exist first
         self.player: Player = Player(
             [self.dealer.deal_card() for _ in range(2)]
-        )
+        )  # TODO:  Make the initial dealing of 2 cards more clear
 
-    def __next__(self):
-        return self
-
-    def __iter__(self):
-        return self
-
+    # TODO: the player turn is not immediately clear on inspection.
     def __players_turn(self):
         while not any([self.player.busted, self.player.sticking]):
             self.print_hands()
@@ -29,14 +21,16 @@ class Game:
                 self.player.hit(self.dealer.deal_card())
             else:
                 self.player.stick()
-            if self.player.score > 21:
+
+            if self.player.score > 21:  # FIXME: Magic number
                 self.player.bust()
 
+    # TODO: the dealer turn is not immediately clear on inspection.
     def __dealers_turn(self):
         self.dealer.reveal_hidden()
-        if not self.player.score > 21:
+        if not self.player.score > 21:  # FIXME: Magic number
             # Unusual but it's guaranteed to exit after finite loops
-            while not self.dealer.score > 17:
+            while not self.dealer.score > 17:  # FIXME: Magic number
                 print("Dealer hits...")
                 self.dealer.hit(self.dealer.deal_card())
             self.print_hands()
@@ -51,10 +45,10 @@ class Game:
     def play(self):
         self.__players_turn()
         self.__dealers_turn()
-        if self.player.score > 21:
+        if self.player.score > 21:  # FIXME: Magic number
             print(f"Dealer ({self.dealer.score}) wins. "
                   f"Player ({self.player.score}) is bust.")
-        elif self.dealer.score > 21:
+        elif self.dealer.score > 21:  # FIXME: Magic number
             print(f"Player ({self.player.score}) wins: " 
                   f"Dealer ({self.dealer.score}) is bust.")
         elif self.dealer.score > self.player.score:
