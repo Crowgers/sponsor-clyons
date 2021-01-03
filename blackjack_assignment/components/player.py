@@ -11,7 +11,7 @@ class Player:
 
     def hit(self, card: Card):
         self.hand.append(card)
-        self.score = sum([item.value for item in self.hand])
+        self.score += card.value
 
     def bust(self):
         self.busted = True
