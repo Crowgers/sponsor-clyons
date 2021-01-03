@@ -20,5 +20,9 @@ class Deck:
         ]
 
     def draw_card(self) -> Card:
+        """
+        Removes a pseudo Random card from the deck and returns it
+        :return: the card
+        """
         choice_index = random.choice(range(len(self.__cards)))
         return self.__cards.pop(choice_index)

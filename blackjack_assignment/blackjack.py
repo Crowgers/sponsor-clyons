@@ -8,5 +8,8 @@ if __name__ == "__main__":
     finished = 0
     while not finished:
         Game().play()
-        finished = ask("Would you like to play again?", ["Yes", "No"])
+        finished = ask(
+            "Game Finished. Would you like to play again?",
+            ["Yes", "No"]
+        )
     print("Exiting program.")

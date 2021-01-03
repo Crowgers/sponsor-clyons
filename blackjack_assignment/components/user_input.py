@@ -1,4 +1,10 @@
-def ask(prompt: str, options: list):
+def ask(prompt: str, options: list) -> int:
+    """
+    Asks a user a question and displays a numerical list of options
+    :param prompt: question prompt to display
+    :param options: list of options
+    :return: python index of selection
+    """
     selected_option = ""
     while selected_option not in options:
         try:

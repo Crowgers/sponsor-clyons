@@ -11,10 +11,19 @@ class Dealer(Player):
         self.__hidden: list[Card] = [self.deal_card()]
 
     def deal_card(self) -> Card:
+        """
+        :return: Card drawn from the deck
+        """
         return self.__deck.draw_card()
 
     def count_hidden(self) -> int:
+        """
+        :return: count of the dealer's hidden card(s)
+        """
         return len(self.__hidden)
 
     def reveal_hidden(self):
+        """
+        Moves the card from hidden into the dealers public hand
+        """
         self.hit(self.__hidden.pop())
